@@ -1,4 +1,4 @@
-# Glipbot Bootstrap
+# Glip Bot Bootstrap
 
 ## Overview
 
@@ -14,21 +14,21 @@ Right now this supports creating a webhook subscription if you have the followin
 
 ### As-is
 
-Go to: [https://grokify.github.io/glipbot-bootstrap](https://grokify.github.io/glipbot-bootstrap)
+Go to: [https://grokify.github.io/glip-bot-bootstrap](https://grokify.github.io/glip-bot-bootstrap)
 
 ### Customize
 
 You can customize this yourself by cloning the repo and running this locally:
 
 ```
-$ git clone https://grokify.github.io/glipbot-bootstrap
+$ git clone https://grokify.github.io/glip-bot-bootstrap
 ```
 
 Then you can start a local http server, such as [`http-server` on NPM](https://www.npmjs.com/package/http-server):
 
 ```bash
 $ npm install http-server -g
-$ http-server glipbot-bootstrap
+$ http-server glip-bot-bootstrap
 ```
 
 The go to https://localhost:8080 in your browser, assuming `http-server` is running on port 8080.
