@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Glip Bot Webhook Creator</title>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
+
+        <script type="text/javascript">
+            function createWebhook(serverURL, accessToken, webhookURL, eventFilters)
+            {
+                var requestBody = {
+                    eventFilters: eventFilters.split(/\r?\n/),
+                    deliveryMode: {
+                        transportType: "WebHook",
+                        address: webhookURL
+                    },
+                    expiresIn: 500000000
+                };
+                console.log(JSON.stringify(req))
+
+                axios.post(
+                    serverURL,
+                    requestBody,
+                    {
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken,
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                )
+                .then(function (response) {
+                    alert(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    alert(JSON.stringify(error.response.data));
+                });
+            }
+        </script>
+
+        <style>
+        h1,p,label,li {font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;}
+        label {clear:both;}
+        .form-item {width:400px;}
+        </style>
+    </head>
+    <body>
+        <h1>Glipbot Bootstrap Webhook Creator</h1>
+
+        <p>Glipbot Bootstrap is an easy way to set up your private team bot on Glip</a>. This form allows you to create a webhook subscription to your bot without having to code it yourself. All you need is a configured bot app, your bot token, and webhook URL.</p>
+
+        <p>You can edit this here: <a href="https://github.com/grokify/glipbot-bootstrap">https://github.com/grokify/glipbot-bootstrap</a></p>
+
+        <p>Prerequisites</p>
+
+        <ol>
+            <li>A configured bot in the Developer Portal: <a href="https://developer.ringcentral.com">https://developer.ringcentral.com</a></li>
+            <li>A static access token for your bot</li>
+            <li>An online webhook URL that will responed with a `Validation-Token` header</li>
+        </ol>
+
+        <div class="form-group">
+            <label for="serverURL">API Server URL</label>
+            <div style="clear:both;"></div>
+            <select id="serverURL">
+                <option value="https://platform.ringcentral.com/restapi/v1.0/subscription">Production - https://platform.ringcentral.com</option>
+                <option value="https://platform.devtest.ringcentral.com/restapi/v1.0/subscription">Sandbox - https://platform.devtest.ringcentral.com</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="alterEgo">Bot Access Token</label>
+            <div style="clear:both;"></div>
+            <input type="text" class="form-control, form-item" id="botAccessToken">
+        </div>
+
+        <div class="form-group">
+            <label for="webhookURL">Webhook URL</label>
+            <div style="clear:both;"></div>
+            <input type="text" class="form-control, form-item" id="webhookURL">
+        </div>
+
+        <div>
+            <label for="eventFilters">Event Filters</label>
+            <div style="clear:both;"></div>
+            <textarea class="form-item" rows="10" id="eventFilters">/restapi/v1.0/glip/posts</textarea>
+        </div>
+
+        <div><input type="button" value="Create Webhook" onclick="createWebhook(document.getElementById('serverURL').value,document.getElementById('botAccessToken').value,document.getElementById('webhookURL').value,document.getElementById('eventFilters').value);"/>
+        </div>
+
+        <p>More information on configuring Glip bots is avilable here:</p>
+
+        <ul>
+            <li><a href="http://ringcentral-api-docs.readthedocs.io/en/latest/glip_bots/">Glip Bot Developer Guide</a></li>
+            <li><a href="https://medium.com/ringcentral-developers/deploy-a-glip-bot-to-aws-lambda-60a2a09ddcd4">Deploy a Glip chatbot to AWS Lambda</a></li>
+            <li><a href="https://medium.com/ringcentral-developers/latest-glip-bot-provision-flow-a626a8dd0d98">Latest Glip bot provision flow</a></li>
+        </ul>
+
+        <p>Created by: <a href="https://github.com/grokify">Grokify</a></p>
+    </body>
+</html>
